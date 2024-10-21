@@ -185,3 +185,24 @@ Object.freeze(myFavoriteFootballTeam);
 
 const {sport, team, year, players} = myFavoriteFootballTeam;
 const { coachName } = myFavoriteFootballTeam.headCoach;
+
+// asignando Variables del destructuring a textContent que corresponde
+typeOfSport.textContent = sport;
+teamName.textContent = team;
+worldCupYear.textContent = year;
+headCoach.textContent = coachName;
+
+
+// Funcion para la seleccion de cartas con el filtro
+const setPlayerCards = (arr = players) => {
+
+  playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname})=>{
+    `<div class="player-card">
+    <!-- Usanso operador ternarion en isCaptain y nickname -->
+      <h2>${isCaptain ? "(Captain)" : ""} ${name}</h2>
+        <p>Position: ${position}</p>
+        <p>Number: ${number}</p>
+        <p>Nickname: ${nickname !== null ? nickname : "N/A"}</p>
+    </div>`
+  });
+};
