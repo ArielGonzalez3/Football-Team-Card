@@ -32,7 +32,7 @@ const myFavoriteFootballTeam = {
         isCaptain: false,
         nickname: null,
       },
-       {
+      {
         name: "Ricardo Bochini",
         position: "midfielder",
         number: 3,
@@ -196,13 +196,39 @@ headCoach.textContent = coachName;
 // Funcion para la seleccion de cartas con el filtro
 const setPlayerCards = (arr = players) => {
 
-  playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname})=>{
+  playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname})=>
     `<div class="player-card">
-    <!-- Usanso operador ternarion en isCaptain y nickname -->
       <h2>${isCaptain ? "(Captain)" : ""} ${name}</h2>
         <p>Position: ${position}</p>
         <p>Number: ${number}</p>
         <p>Nickname: ${nickname !== null ? nickname : "N/A"}</p>
     </div>`
-  });
+  ).join('');
 };
+
+playersDropdownList.addEventListener('change', (e) => {
+  // console.log(e.target.value);
+
+  playerCards.innerHTML = '';
+
+  switch (e.target.value) {
+    case 'nickname':
+      setPlayerCards(players.filter((player) => player.nickname !== null));
+      break;
+    case "forward":
+      setPlayerCards(players.filter((player) => player.position === "forward"));
+      break;
+    case "midfielder":
+      setPlayerCards(players.filter((player) => player.position === "midfielder"));
+      break;
+    case "defender":
+      setPlayerCards(players.filter((player) => player.position === "defender"));
+      break;
+    case "goalkeeper":
+      setPlayerCards(players.filter((player) => player.position === "goalkeeper"));
+      break;
+    default:
+      setPlayerCards();
+      break;
+  }
+})
